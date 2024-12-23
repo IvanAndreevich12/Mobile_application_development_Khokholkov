@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="to_second_screen">to_second_screen</string>
+    <string name="to_first_screen">to_first_screen</string>
+
+</resources>
