@@ -11,6 +11,7 @@ import com.example.myapplication.databinding.ActivityMainBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,20 +25,13 @@ class MainActivity : AppCompatActivity() {
 
         CoroutineScope(Dispatchers.IO).launch {
             val data = repository.getProducts()
+            val adapter = ProductAdapter(data)
+            withContext(Dispatchers.Main) {
+                binding.recyclerViewProducts.adapter = adapter
+                binding.recyclerViewProducts.layoutManager = LinearLayoutManager(this@MainActivity)
+            }
         }
-//        val data = repository.getProducts()
-//        val adapter = ProductAdapter(data)
 
-//        binding.button2.setOnClickListener {
-//            startActivity(MainActivity2.createIntent(this))
-//        }
 
-//        binding.recyclerViewProducts.adapter = adapter
-        binding.recyclerViewProducts.layoutManager = LinearLayoutManager(this)
     }
-
-//    companion object {
-//        fun createIntent2(fromContext: Context): Intent {
-//            return Intent(fromContext, MainActivity::class.java)
-//        }
 }
