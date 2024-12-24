@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.data.RepositoryImpl
 import com.example.domain.Repository
 import com.example.myapplication.databinding.ActivityMainBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,12 +22,17 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val data = repository.getData()
-        val adapter = ProductAdapter(data)
+        CoroutineScope(Dispatchers.IO).launch {
+            val data = repository.getProducts()
+        }
+//        val data = repository.getProducts()
+//        val adapter = ProductAdapter(data)
+
 //        binding.button2.setOnClickListener {
 //            startActivity(MainActivity2.createIntent(this))
 //        }
-        binding.recyclerViewProducts.adapter = adapter
+
+//        binding.recyclerViewProducts.adapter = adapter
         binding.recyclerViewProducts.layoutManager = LinearLayoutManager(this)
     }
 
@@ -32,5 +40,4 @@ class MainActivity : AppCompatActivity() {
 //        fun createIntent2(fromContext: Context): Intent {
 //            return Intent(fromContext, MainActivity::class.java)
 //        }
-//    }
 }

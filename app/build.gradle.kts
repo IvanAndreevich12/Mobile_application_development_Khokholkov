@@ -1,8 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    id("kotlin-kapt")
-    id("com.google.devtools.ksp")
+    kotlin("kapt")
 }
 
 android {
@@ -57,25 +56,22 @@ dependencies {
     val retrofitVersion = "2.10.0"
     val okhttp3Version = "4.12.0"
 
-
-//retrofit
+    //retrofit
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation("com.squareup.retrofit2:converter-moshi:$retrofitVersion")
     implementation("com.squareup.okhttp3:okhttp:$okhttp3Version")
     implementation("com.squareup.okhttp3:logging-interceptor:$okhttp3Version")
 
-//room
+    //room
     implementation("androidx.room:room-runtime:$roomVersion")
     kapt("androidx.room:room-compiler:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
     androidTestImplementation("android.arch.persistence.room:testing:1.1.1")
 
-//moshi
+    //moshi
     implementation("com.squareup.moshi:moshi-kotlin:$moshiVersion")
-    implementation("com.squareup.moshi:moshi:$moshiVersion")
     kapt("com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion")
 
     implementation(project(":domain"))
     implementation(project(":data"))
-
 }
